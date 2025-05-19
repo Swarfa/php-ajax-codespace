@@ -2,13 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>AJAX with PHP</title>
+  <title>Quote Vibes</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Tulpen+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Qwitcher+Grypen:wght@700&display=swap');
+
+    /* keep this hidden until it's time to shine */
+    #vibeBox {
+      display: none;
+      text-shadow: 4px 4px 4px grey;
+    }
+
+    /* lil fade-in animation for smooth vibes */
+    .fade-in {
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <h1>AJAX Test</h1>
-  <button id="fetchData">Fetch Data</button>
-  <div id="result"></div>
+  <h1>Quote Vibes</h1>
+  <div id="vibeBox">Loading something deep...</div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <script>
+    let fontIndex = 0;
+
+    function grabQuote() {
+      const fontList = [
+        "Qwitcher Grypen",
+        "Tulpen One",
+        "Shadows Into Light"
+      ];
+
+      const request = new XMLHttpRequest();
+
+      request.open('GET', 'random_quotes.php', true);
+
+      request.onload = function () {
+        if (request.status === 200) {
+          const box = document.getElementById("vibeBox");
+          box.innerText = request.responseText;
+          box.style.display = "block";
+          box.style.fontFamily = fontList[fontIndex];
+
+         
