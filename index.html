@@ -50,4 +50,31 @@
           box.style.display = "block";
           box.style.fontFamily = fontList[fontIndex];
 
-         
+          fontIndex = (fontIndex + 1) % fontList.length;
+
+          box.classList.add("fade-in");
+          setTimeout(() => {
+            box.classList.remove("fade-in");
+          }, 1000);
+        } else {
+          alert("Something went wrong grabbing the vibe.");
+        }
+      };
+
+      request.onerror = function () {
+        alert("AJAX tripped up. Try again later.");
+      };
+
+      request.send();
+    }
+
+    function startVibes() {
+      grabQuote();
+      setInterval(grabQuote, 5000);
+    }
+
+    // fire it up
+    startVibes();
+  </script>
+</body>
+</html>
